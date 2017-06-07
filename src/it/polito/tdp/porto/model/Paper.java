@@ -1,5 +1,11 @@
 package it.polito.tdp.porto.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 public class Paper {
 
 	private int eprintid;
@@ -8,6 +14,12 @@ public class Paper {
 	private String publication;
 	private String type;
 	private String types;
+	private Map<Integer, Author> autori= new HashMap<Integer, Author>();
+	
+	public Paper(int eprintid) {
+		super();
+		this.eprintid = eprintid;
+	}
 
 	public Paper(int eprintid, String title, String issn, String publication, String type, String types) {
 		this.eprintid = eprintid;
@@ -68,8 +80,41 @@ public class Paper {
 
 	@Override
 	public String toString() {
-		return "Paper [eprintid=" + eprintid + ", title=" + title + ", issn=" + issn + ", publication=" + publication
-				+ ", type=" + type + ", types=" + types + "]";
+		return eprintid + "titolo=" + title +"\n";
 	}
+	
+  public void addAutore(Author a){
+	  if(!autori.containsKey(a.getId()))
+		  autori.put(a.getId(),a);
+  }
+  
+  
 
+public Map<Integer,Author> getAutori() {
+	return autori;
+}
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + eprintid;
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Paper other = (Paper) obj;
+	if (eprintid != other.eprintid)
+		return false;
+	return true;
+}
+ 
+  
 }
